@@ -1,5 +1,6 @@
 const { ApolloServer } = require("@apollo/server")
 const { startStandaloneServer } = require("@apollo/server/standalone")
+const { v1: uuid } = require("uuid")
 
 let authors = [
   {
@@ -33,7 +34,7 @@ let books = [
     published: 2008,
     author: "Robert Martin",
     id: "afa5b6f4-344d-11e9-a414-719c6709cf3e",
-    genres: ["refactoring"],
+    genres: ["refactoring", "agile"],
   },
   {
     title: "Agile software development",
@@ -102,6 +103,15 @@ const typeDefs = `
     allBooks(author: String, genre: String): [Book!]!
     allAuthors:  [Author!]!
   }
+
+  type Mutation {
+    addBook(
+      title: String!
+      author: String!
+      published: Int
+      genres: [String!]!
+    ): Book
+  }
 `
 
 const resolvers = {
@@ -109,16 +119,20 @@ const resolvers = {
     bookCount: () => books.length,
     authorCount: () => authors.length,
     allBooks: (_, args) => {
-      console.log(args)
-      let filteredBooks = books;
+      let filteredBooks = books
+
       if (args.author) {
-        filteredBooks = filteredBooks.filter((book) => book.author === args.author)
+        filteredBooks = filteredBooks.filter(
+          (book) => book.author === args.author
+        )
       }
 
       if (args.genre) {
-        filteredBooks = filteredBooks.filter((book) => book.genres.includes(args.genre))
+        filteredBooks = filteredBooks.filter((book) =>
+          book.genres.includes(args.genre)
+        )
       }
-      
+
       return filteredBooks
     },
     allAuthors: () => authors,
@@ -126,6 +140,24 @@ const resolvers = {
   Author: {
     bookCount: (root) =>
       books.filter((book) => book.author === root.name).length,
+  },
+  Mutation: {
+    addBook: (root, args) => {
+      let author = authors.find((a) => a.name === args.author);
+      
+      if(!author) {
+        author = {
+          name: args.author,
+          id: uuid()
+        }
+
+        authors = authors.concat(author)
+      }
+      
+      const book = { ...args, id: uuid() }
+      books = books.concat(book)
+      return book
+    },
   },
 }
 
