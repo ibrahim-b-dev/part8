@@ -5,7 +5,7 @@ import { useState } from "react"
 const Authors = (props) => {
   const { loading, error, data } = useQuery(ALL_AUTHORS)
   const [updateAuthor] = useMutation(EDIT_AUTHOR, {
-    refetchQueries: [{ query: ALL_AUTHORS}]
+    refetchQueries: [{ query: ALL_AUTHORS }],
   })
 
   const [name, setName] = useState("")
@@ -59,13 +59,20 @@ const Authors = (props) => {
         <form onSubmit={submit}>
           <p>
             <label htmlFor="name">name</label>
-            <input
+            <select
+              id="name"
               value={name}
               onChange={({ target }) => setName(target.value)}
-              type="text"
-              id="name"
-            />
+            >
+              <option value="">Select an author</option>
+              {data.allAuthors.map((a) => (
+                <option key={a.id} value={a.name}>
+                  {a.name}
+                </option>
+              ))}
+            </select>
           </p>
+
           <p>
             <label htmlFor="name">born</label>
             <input
