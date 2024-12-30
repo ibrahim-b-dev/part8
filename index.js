@@ -163,11 +163,11 @@ const resolvers = {
       return book
     },
     editAuthor: (root, args) => {
-      const author = authors.find((a) => a.name === args.name);
-      
-      if(author) {
-        const updatedAuthor = { ...author, born: args.setBornTo}
-        authors.concat(updatedAuthor)
+      const authorIndex = authors.findIndex((a) => a.name === args.name)
+
+      if(authorIndex !== -1) {
+        const updatedAuthor = { ...authors[authorIndex], born: args.setBornTo}
+        authors[authorIndex] = updatedAuthor
         return updatedAuthor
       }
 
