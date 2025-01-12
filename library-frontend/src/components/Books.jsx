@@ -48,12 +48,12 @@ const Books = (props) => {
       </table>
 
       <div>
-        <button onClick={() => setGenreFilter("")}>All</button>
         {genres.map((g) => (
           <button key={g} onClick={() => setGenreFilter(g)}>
             {g}
           </button>
         ))}
+        <button onClick={() => setGenreFilter("")}>all genres</button>
       </div>
     </div>
   )
