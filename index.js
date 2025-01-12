@@ -133,6 +133,7 @@ const typeDefs = `
     authorCount: Int!
     allBooks(author: String, genre: String): [Book!]!
     allAuthors:  [Author!]!
+    me: User
   }
 
   type Mutation {
@@ -169,7 +170,9 @@ const resolvers = {
       let query = {}
 
       if (args.author) {
-        const author = await Author.findOne({ name: args.author })
+        const author = await Author.findOne({
+          name: { $regex: new RegExp(`^${args.author}$`, "i") },
+        })
 
         if (author) {
           query.author = author._id
@@ -179,20 +182,33 @@ const resolvers = {
       }
 
       if (args.genre) {
-        query.genres = args.genre
+        query.genres = { $regex: new RegExp(`^${args.genre}$`, "i") }
       }
 
       const books = await Book.find(query).populate("author").exec()
-      return books.filter((book) => book.author && book.author.name)
+      const filteredBooks = books.filter(
+        (book) => book.author && book.author.name
+      )
+
+      return filteredBooks
     },
     allAuthors: async (root, args) => {
-      return Author.find({})
+      const authors = await Author.find({})
+
+      return authors
+    },
+    me: (root, args, context) => {
+      return context.currentUser
     },
   },
   Author: {
     bookCount: async (root) => {
       const authorId = new mongoose.Types.ObjectId(root.id)
-      return await Book.countDocuments({ author: authorId })
+      return Book.countDocuments({ author: authorId })
+    },
+    books: async (root) => {
+      const authorId = new mongoose.Types.ObjectId(root.id)
+      return Book.find({ author: authorId })
     },
   },
   Mutation: {
@@ -300,9 +316,24 @@ const resolvers = {
     },
 
     createUser: async (root, args) => {
-      const user = new User({ username: args.username })
+      if (!args.favoriteGenre) {
+        throw new GraphQLError("favoriteGenre is required", {
+          extensions: {
+            code: "BAD_USER_INPUT",
+            invalidArgs: "favoriteGenre",
+          },
+        })
+      }
 
-      return user.save().catch((error) => {
+      const user = new User({
+        username: args.username,
+        favoriteGenre: args.favoriteGenre,
+      })
+
+      try {
+        const newUser = await user.save()
+        return newUser
+      } catch (error) {
         throw new GraphQLError("Creating the user failed", {
           extensions: {
             code: "BAD_USER_INPUT",
@@ -310,7 +341,7 @@ const resolvers = {
             error,
           },
         })
-      })
+      }
     },
 
     login: async (root, args) => {

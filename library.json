@@ -1,0 +1,123 @@
+[
+  {
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "published": 2008,
+    "genres": ["Programming", "Software Development"]
+  },
+  {
+    "title": "The Clean Coder",
+    "author": "Robert C. Martin",
+    "published": 2011,
+    "genres": ["Programming", "Career Development"]
+  },
+  {
+    "title": "Clean Architecture",
+    "author": "Robert C. Martin",
+    "published": 2017,
+    "genres": ["Software Architecture", "Programming"]
+  },
+  {
+    "title": "You Don't Know JS: Scope & Closures",
+    "author": "Kyle Simpson",
+    "published": 2014,
+    "genres": ["JavaScript", "Web Development"]
+  },
+  {
+    "title": "You Don't Know JS: Async & Performance",
+    "author": "Kyle Simpson",
+    "published": 2015,
+    "genres": ["JavaScript", "Web Development"]
+  },
+  {
+    "title": "You Don't Know JS: ES6 & Beyond",
+    "author": "Kyle Simpson",
+    "published": 2015,
+    "genres": ["JavaScript", "Programming"]
+  },
+  {
+    "title": "JavaScript: The Good Parts",
+    "author": "Douglas Crockford",
+    "published": 2008,
+    "genres": ["JavaScript", "Programming"]
+  },
+  {
+    "title": "Eloquent JavaScript",
+    "author": "Marijn Haverbeke",
+    "published": 2018,
+    "genres": ["JavaScript", "Web Development"]
+  },
+  {
+    "title": "Design Patterns: Elements of Reusable Object-Oriented Software",
+    "author": "Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides",
+    "published": 1994,
+    "genres": ["Software Architecture", "Programming"]
+  },
+  {
+    "title": "Refactoring: Improving the Design of Existing Code",
+    "author": "Martin Fowler",
+    "published": 1999,
+    "genres": ["Programming", "Software Development"]
+  },
+  {
+    "title": "Patterns of Enterprise Application Architecture",
+    "author": "Martin Fowler",
+    "published": 2002,
+    "genres": ["Software Architecture", "Programming"]
+  },
+  {
+    "title": "Pragmatic Programmer",
+    "author": "Andrew Hunt, David Thomas",
+    "published": 1999,
+    "genres": ["Programming", "Career Development"]
+  },
+  {
+    "title": "The Art of Computer Programming: Volume 1",
+    "author": "Donald E. Knuth",
+    "published": 1968,
+    "genres": ["Algorithms", "Mathematics"]
+  },
+  {
+    "title": "The Art of Computer Programming: Volume 2",
+    "author": "Donald E. Knuth",
+    "published": 1969,
+    "genres": ["Algorithms", "Mathematics"]
+  },
+  {
+    "title": "Head First Design Patterns",
+    "author": "Eric Freeman, Elisabeth Robson",
+    "published": 2004,
+    "genres": ["Software Architecture", "Programming"]
+  },
+  {
+    "title": "Effective Java",
+    "author": "Joshua Bloch",
+    "published": 2008,
+    "genres": ["Java", "Programming"]
+  },
+  {
+    "title": "Cracking the Coding Interview",
+    "author": "Gayle Laakmann McDowell",
+    "published": 2015,
+    "genres": ["Interview Preparation", "Programming"]
+  },
+  {
+    "title": "Code Complete",
+    "author": "Steve McConnell",
+    "published": 2004,
+    "genres": ["Programming", "Software Development"]
+  },
+  {
+    "title": "The Mythical Man-Month",
+    "author": "Frederick P. Brooks Jr.",
+    "published": 1975,
+    "genres": ["Software Engineering", "Project Management"]
+  },
+  {
+    "title": "Introduction to the Theory of Computation",
+    "author": "Michael Sipser",
+    "published": 1996,
+    "genres": ["Computer Science", "Theory"]
+  }
+]
+
