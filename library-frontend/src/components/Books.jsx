@@ -3,8 +3,10 @@ import { ALL_BOOKS } from "../queries"
 import { useState } from "react"
 
 const Books = (props) => {
-  const { loading, error, data } = useQuery(ALL_BOOKS)
   const [genreFilter, setGenreFilter] = useState("")
+  const { loading, error, data } = useQuery(ALL_BOOKS, {
+    variables: { genre: genreFilter },
+  })
 
   if (!props.show) {
     return null
@@ -22,10 +24,6 @@ const Books = (props) => {
     new Set(data.allBooks.flatMap((book) => book.genres))
   )
 
-  const filteredBooks = genreFilter
-  ? data.allBooks.filter((book) => book.genres.includes(genreFilter))
-  : data.allBooks;
-
   return (
     <div>
       <h2>books</h2>
@@ -37,7 +35,7 @@ const Books = (props) => {
             <th>author</th>
             <th>published</th>
           </tr>
-          {filteredBooks.map((a) => (
+          {data.allBooks.map((a) => (
             <tr key={a.id}>
               <td>{a.title}</td>
               <td>{a.author.name}</td>
